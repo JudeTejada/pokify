@@ -1,5 +1,5 @@
 import React from "react";
-const Searchbar = ({ onSearchChange }) => {
+const Searchbar = ({ searchChange }) => {
   return (
     <header>
       <nav className="nav">
@@ -10,9 +10,10 @@ const Searchbar = ({ onSearchChange }) => {
           <input
             type="search"
             placeholder="search a pokemon"
-            onChange={onSearchChange}
+            onChange={searchChange}
             className="nav__input"
           />
+          <i className="gg-search nav__icon"></i>
         </div>
       </nav>
     </header>

@@ -33,13 +33,18 @@ class App extends React.Component {
   };
 
   render() {
-    const { pokemons } = this.state;
-    console.log(pokemons);
+    const { pokemons, searchField } = this.state;
 
-    return (
+    const filteredSearch = pokemons.filter((p) => {
+      return p.name.toLowerCase().includes(searchField.toLowerCase());
+    });
+
+    return !pokemons.length ? (
+      <h1>Loading</h1>
+    ) : (
       <main className="container">
         <Searchbar searchChange={this.onSearchChange} />
-        <CardList pokemonData={pokemons} />
+        <CardList pokemonData={filteredSearch} />
       </main>
     );
   }

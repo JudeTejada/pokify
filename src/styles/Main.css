@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;500;700&display=swap');
-
+@import url('https://css.gg/search.css');
 /* BASE FILE */
 *,
 *::before,
@@ -16,8 +16,8 @@ body{
 font-family:'Muli', sans-serif;
 width:100%;
 background: #EECDA3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #EF629F, #EECDA3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #EF629F, #EECDA3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: -webkit-linear-gradient(to top, #EF629F, #EECDA3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #EF629F, #EECDA3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
 }
@@ -36,26 +36,51 @@ background: linear-gradient(to right, #EF629F, #EECDA3); /* W3C, IE 10+/ Edge, F
 .nav__logo{
   text-decoration: none;
   color:#fff;
-  font-size:2rem;
+  font-size:3rem;
   font-weight:700;
+
   
   
 }
+.nav__search{
+  display:flex;
+  align-items:center;
+
+}
+.nav__icon{
+    margin-bottom:0.3em;
+    margin-left:-2em; opacity:0.7;
+ }
 .nav__input{
   border:none;
   outline:none;
-
+  background:none;
+  font-size:1.4em;
   border-bottom:1px solid #333;
+
+}
+
+
+
+.nav input::placeholder{
+  color:#111;
+  font-family:inherit;
+  font-size:1.6rem;
+
 }
 
 .grid{
   display: grid;
   gap: 2em;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  place-items: center;
+  justify-content: center;
+ 
 }
 
 /*  POKEMON */
 .pokemon{
+  width:100%;
 background:#fff;
   border-radius:1em;
   box-shadow: 0 .5rem 1rem rgba(#333,.4);
@@ -79,6 +104,7 @@ padding:5em 2em;
 .pokemon__title{
   font-size:2.6rem;
   margin-bottom:0.2em;
+
 }
 .pokemon__level{
   position: absolute;
@@ -87,6 +113,7 @@ padding:5em 2em;
   margin-left:1em;
   margin-top:1em;
   font-size:1.6rem;
+  color:#EF629F;
 }
 .pokemon__type{
   color:#777;
@@ -97,7 +124,7 @@ padding:5em 2em;
   background-color:#EECDA3;
   color:#EF629F;
   /* background-color: rgba(255, 255, 255, 0.6); */
-  border-radius: 24%;
+  border-radius: 50%;
   width: 120px;
   height: 120px;
   margin:  0 auto;
