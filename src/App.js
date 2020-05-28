@@ -2,8 +2,8 @@ import React from "react";
 import Searchbar from "./components/Searchbar";
 import { fetchAllPokemon, fetchPokemonData } from "./components/ApiRequest";
 import CardList from "./components/CardList";
+import Loader from "./components/Loader";
 
-import "./styles/Main.css";
 //contains the strucuture of the app
 class App extends React.Component {
   constructor() {
@@ -11,20 +11,27 @@ class App extends React.Component {
     this.state = {
       pokemons: [],
       searchField: "",
+      error: null,
+      isLoading: false,
     };
   }
   //if page loaded
   async componentDidMount() {
+    this.setState({ isLoading: true });
     let dataArr = [];
 
     const data = await fetchAllPokemon(
       "https://pokeapi.co/api/v2/pokemon?limit=25"
     );
     data.map(async (p) => {
-      const data = await fetchPokemonData(p.url);
-      dataArr.push(data);
+      try {
+        const data = await fetchPokemonData(p.url);
+        dataArr.push(data);
 
-      this.setState({ pokemons: dataArr });
+        this.setState({ pokemons: dataArr, isLoading: false });
+      } catch (err) {
+        this.setState({ error: err.message, isLoading: false });
+      }
     });
   }
   // get the input val
@@ -33,14 +40,17 @@ class App extends React.Component {
   };
 
   render() {
-    const { pokemons, searchField } = this.state;
+    const { pokemons, searchField, isLoading, error } = this.state;
 
     const filteredSearch = pokemons.filter((p) => {
       return p.name.toLowerCase().includes(searchField.toLowerCase());
     });
+    if (error) {
+      return <h1>That's too bad </h1>;
+    }
 
-    return !pokemons.length ? (
-      <h1>Loading</h1>
+    return isLoading ? (
+      Loader()
     ) : (
       <main className="container">
         <Searchbar searchChange={this.onSearchChange} />

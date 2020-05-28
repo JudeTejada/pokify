@@ -20,6 +20,7 @@ background: -webkit-linear-gradient(to top, #EF629F, #EECDA3);  /* Chrome 10-25,
 background: linear-gradient(to top, #EF629F, #EECDA3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
+
 }
 .container{
   max-width:110rem;
@@ -72,7 +73,7 @@ background: linear-gradient(to top, #EF629F, #EECDA3); /* W3C, IE 10+/ Edge, Fir
 .grid{
   display: grid;
   gap: 2em;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
   place-items: center;
   justify-content: center;
  
@@ -130,17 +131,19 @@ padding:5em 2em;
   margin:  0 auto;
 }
 
-/* .pokemon::before{
-content: '';
-height:5rem;
-width:5rem;
-background:blue;
-position:relative;  
-position: absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-margin-top:3em;
+/*  LOADER */
 
-} */
-
+.loader {
+  border: 3px solid #EECDA3;
+  border-top-color: #EF629F;
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  animation: spin 1s linear infinite;
+  
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
