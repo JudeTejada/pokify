@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Searchbar from "./components/Searchbar";
+import { fetchAllPokemon, fetchPokemonData } from "./components/ApiRequest";
+import CardList from "./components/CardList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./styles/Main.css";
+//contains the strucuture of the app
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      pokemons: [],
+      searchField: "",
+    };
+  }
+  //if page loaded
+  async componentDidMount() {
+    let dataArr = [];
+
+    const data = await fetchAllPokemon(
+      "https://pokeapi.co/api/v2/pokemon?limit=25"
+    );
+    data.map(async (p) => {
+      const data = await fetchPokemonData(p.url);
+      dataArr.push(data);
+
+      this.setState({ pokemons: dataArr });
+    });
+  }
+  // get the input val
+  onSearchChange = (event) => {
+    this.setState({ searchField: event.target.value });
+  };
+
+  render() {
+    const { pokemons } = this.state;
+    console.log(pokemons);
+
+    return (
+      <main className="container">
+        <Searchbar searchChange={this.onSearchChange} />
+        <CardList pokemonData={pokemons} />
+      </main>
+    );
+  }
 }
 
 export default App;
